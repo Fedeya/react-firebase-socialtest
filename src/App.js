@@ -13,7 +13,11 @@ import Home from "./views/Home";
 import Login from "./views/Login";
 import SignUp from "./views/SignUp";
 
+// IsAuth Views
+
 import Profile from "./views/Profile";
+import Dashboard from "./views/Dashboard";
+
 
 // Components
 import Navigation from "./components/Navigation";
@@ -52,6 +56,7 @@ function App() {
       {
         isAuth ? (
           <Switch>
+            <Route exact path="/" component={Dashboard} />
             <Route exact path="/profile" component={Profile} />
             <Route component={Error404} />
           </Switch>
@@ -64,6 +69,8 @@ function App() {
             </Switch>
           )
       }
+
+      <div className="mb-5"></div>
 
     </Router>
   );

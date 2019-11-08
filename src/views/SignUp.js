@@ -11,11 +11,14 @@ function SignUp(props) {
 
   const createAccount = v => {
     setLoading(true);
-    firebase.auth().createUserWithEmailAndPassword(v.email, v.password).then(({ user }) => {
-      user.updateProfile({
+    firebase.auth().createUserWithEmailAndPassword(v.email, v.password).then(async ({ user }) => {
+      await user.updateProfile({
         displayName: v.name
       });
-      setLoading(false);
+      firebase.database().ref("/users/").child(user.uid).update({
+        name: v.name,
+        email: v.email
+      }).then(() => setLoading(true));
       props.history.push("/");
     }).catch(err => {
       setError(err.message);
